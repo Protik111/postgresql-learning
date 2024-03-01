@@ -55,8 +55,23 @@ ALTER COLUMN demo type TEXT
 ALTER TABLE users2
 alter COLUMN demo
 set DEFAULT 'DEF_VALUE'
-
 -- ## Delete a column
-ALTER TABLE users2 drop COLUMN password2
+ALTER TABLE users2
+drop COLUMN password2
 
-SELECT * from users2
+SELECT *
+from users2 ## Advanced Query ## 31.1 Foreign key constraints
+
+CREATE table Department (
+    deptID SERIAL PRIMARY KEY, deptName VARCHAR(50)
+);
+
+INSERT INTO Department VALUES (1, 'IT');
+
+CREATE Table Employee (
+    empID SERIAL PRIMARY KEY, empName VARCHAR(50) NOT NULL, departmentID INT, CONSTRAINT fk_contstraint_dept FOREIGN KEY (departmentID) REFERENCES Department (deptID)
+)
+
+insert INTO Employee values (1, 'Protik', 1)
+
+SELECT * FROM Employee
